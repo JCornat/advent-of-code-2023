@@ -1,0 +1,15 @@
+{
+  "name": "idle",
+  "version": "0.0.0",
+  "scripts": {
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "1.4.1",
+    "@types/node": "18.19.1",
+    "@typescript-eslint/eslint-plugin": "6.13.1",
+    "@typescript-eslint/parser": "6.13.1",
+    "eslint": "8.55.0",
+    "typescript": "5.3.2"
+  }
+}
