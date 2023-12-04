@@ -1,5 +1,18 @@
 import * as Utils from './utils';
 
+interface Game {
+  id: number;
+  red: number;
+  green: number;
+  blue: number;
+}
+
+interface CubeSet {
+  red: number;
+  green: number;
+  blue: number;
+}
+
 init()
   .catch(console.error);
 
@@ -23,7 +36,7 @@ async function init() {
   console.log(`Part 2 : ${part2}`);
 }
 
-function parseLine(line: string) {
+function parseLine(line: string): Game {
   const colonSplit = line.split(': ');
   const id = +(/Game (\d+)/.exec(colonSplit[0])?.[1]);
   const gamesSplit = colonSplit[1].split('; ');
@@ -53,7 +66,7 @@ function parseLine(line: string) {
   };
 }
 
-function parseGame(game: string) {
+function parseGame(game: string): CubeSet {
   const res = {
     red: 0,
     green: 0,
@@ -74,28 +87,28 @@ function parseGame(game: string) {
   return res;
 }
 
-function computePossibility(parsedLine) {
+function computePossibility(game: Game) {
   const cubes = {
     red: 12,
     green: 13,
     blue: 14,
   };
 
-  if (parsedLine.red > cubes.red) {
+  if (game.red > cubes.red) {
     return false;
   }
 
-  if (parsedLine.green > cubes.green) {
+  if (game.green > cubes.green) {
     return false;
   }
 
-  if (parsedLine.blue > cubes.blue) {
+  if (game.blue > cubes.blue) {
     return false;
   }
 
   return true;
 }
 
-function calculateMinimum(parsedLine) {
-  return parsedLine.red * parsedLine.green * parsedLine.blue;
+function calculateMinimum(game: Game) {
+  return game.red * game.green * game.blue;
 }
