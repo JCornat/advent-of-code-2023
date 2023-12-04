@@ -1,5 +1,8 @@
 import * as Utils from './utils';
 
+init()
+  .catch(console.error);
+
 async function init() {
   const lines = await Utils.readLines('day-01.txt');
   let part1 = 0;
@@ -74,6 +77,3 @@ function extractNumbers2(line: string) {
 
   return res;
 }
-
-init()
-  .catch(console.error);
