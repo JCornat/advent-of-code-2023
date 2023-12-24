@@ -9,3 +9,35 @@ export async function readLines(filename: string): Promise<string[]> {
       return line.length > 0;
     });
 }
+
+export function isNumber(value: string): boolean {
+  return !isNaN(value);
+}
+
+export function isNaN<T>(arg: T): boolean {
+  if (typeof arg === 'undefined') {
+    return true;
+  } else if (typeof arg === 'string') {
+    const tmp = arg.trim();
+    if (tmp === '') {
+      return true;
+    }
+
+    return Number.isNaN(+tmp);
+  } else if (typeof arg === 'number') {
+    return Number.isNaN(arg);
+  } else if (typeof arg === 'boolean') {
+    return true;
+  } else if (Array.isArray(arg)) {
+    return true;
+  } else if (arg instanceof Date) {
+    return true;
+  } else if (arg && typeof arg === 'object') {
+    return true;
+  } else if (arg === null) {
+    return true;
+  } else {
+    console.error('Argument type unexpected', arg, typeof arg);
+    throw new Error('Argument type unexpected');
+  }
+}
