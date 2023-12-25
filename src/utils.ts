@@ -41,3 +41,48 @@ export function isNaN<T>(arg: T): boolean {
     throw new Error('Argument type unexpected');
   }
 }
+
+export interface ExtractedNumber {
+  value: number;
+  index: number;
+}
+
+export function extractNumbers(line: string): ExtractedNumber[] {
+  const res: ExtractedNumber[] = [];
+  let initialIndex = NaN;
+  let currentNumber = '';
+
+  function addElement(value: number, index: number): void {
+    const element = {
+      value,
+      index,
+    };
+
+    res.push(element);
+  }
+
+  for (let i = 0; i < line.length; i++) {
+    const character = line[i];
+    if (isNumber(character)) {
+      if (isNaN(initialIndex)) {
+        initialIndex = i;
+      }
+
+      currentNumber += character;
+
+      if (i === line.length - 1) { // If last character is a number
+        addElement(+currentNumber, initialIndex);
+      }
+
+      continue;
+    }
+
+    if (currentNumber) {
+      addElement(+currentNumber, initialIndex);
+      initialIndex = NaN;
+      currentNumber = '';
+    }
+  }
+
+  return res;
+}
